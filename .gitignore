@@ -1,0 +1,6 @@
+node_modules
+dist/main.js
+cypress/fixtures
+cypress/plugins
+cypress/plugins
+cypress/support

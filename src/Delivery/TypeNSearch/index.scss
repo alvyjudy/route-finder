@@ -1,0 +1,49 @@
+@use "../../globalStyle/theme";
+
+%SearchBox {
+  background-color: theme.$lightShade;
+  width: 100%;
+}
+
+.InputFieldBox {
+  @extend %SearchBox;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 3em;
+  justify-content: start;
+}
+
+.InputField {
+  outline: none;
+  border: none;
+  font-size: 1.1em;
+  width: 80%;
+  background-color: inherit;
+
+  &::placeholder {
+    color: gray;
+    opacity: 1;
+  }
+}
+
+
+.ResultBox {
+  @extend %SearchBox;
+  position: absolute;
+  height: 12em;
+  overflow: scroll;
+  z-index: 3;
+}
+
+.ResultBoxAnchor {
+  position: relative;
+  width: 100%;
+}
+
+.Delete {
+  border: 0;
+  color: gray;
+  outline: none;
+}
+
