@@ -4,17 +4,12 @@ import $l from "leaflet/dist/leaflet.js";
 
 import $s from "./Map.scss";
 
-const MapDisplay = (props) => {
-  const coordinates = props.coordinates;
-  if (!(coordinates && 
-    coordinates.start && Array.isArray(coordinates.start) && coordinates.start.length === 2 && 
-    coordinates.start && Array.isArray(coordinates.end) && coordinates.end.length === 2 
-    )) {
-    throw new Error("Invalid coordinate passed to <MapDisplay/> ", coordinate)
-  }
-  
-  const start = $l.latLng(...coordinates.start);
-  const end = $l.latLng(...coordinates.end);
+const Map = (props) => {
+  const locations = props.locations;
+  const pickup = locations.pickup.current;
+  const dest = locations.dest.current;
+  const start = $l.latLng(...pickup);
+  const end = $l.latLng(...dest);
   const bounds = $l.latLngBounds(start, end);
 
   const icon = $l.icon({
@@ -26,14 +21,13 @@ const MapDisplay = (props) => {
 
   useEffect(()=>{
     const map = $l.map(ref.current).fitBounds(bounds, {padding: [50, 50]});
-    L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{
+    $l.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{
       attribution:'&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
-    L.marker(start, {icon}).addTo(map);
-    L.marker(end, {icon}).addTo(map);
-    
-
+    $l.marker(start, {icon}).addTo(map);
+    $l.marker(end, {icon}).addTo(map);
   })
+
   return (
     <div className={props.className}>
       <div id="map" ref={ref} className={$s.MapContainer}/>
@@ -41,8 +35,5 @@ const MapDisplay = (props) => {
   )
 }
 
-export default MapDisplay;
+export default Map;
 
-
-// $l.marker(coordinates.start).addTo(map);
-// $l.marker(coordinates.end).addTo(map);

@@ -1,15 +1,20 @@
-import React, {useState} from "react";
+import React, {useState, useRef} from "react";
 
 import $s from "./Request.scss";
 import TypeNSearch from "../TypeNSearch";
 
 const Request = (props) => {
-  const [pickup, setPickup] = useState("");
-  const [dest, setDest] = useState("");
 
   const calculateRoute = e => {
     e.preventDefault();
+    props.setPreviewReady(false);
+    Promise.resolve().then(()=>{
+      props.pickup.current = [41.816, -79.125]
+      props.dest.current = [43.703, -79.632]
+      props.setPreviewReady(true);
+    })
   }
+
   return (
     <div className={props.className}>
       <p className={$s.ReqPickupTitle}>Deliver your parcel now</p>
@@ -17,14 +22,18 @@ const Request = (props) => {
         onSubmit={calculateRoute}
       >
           <TypeNSearch 
-            typewriter={[pickup, setPickup]}
+            valueRef={props.pickup}
             className={$s.SearchBox} 
             whatToType="Enter pickup location"/>
           <TypeNSearch 
-            typewriter={[dest, setDest]}
+            valueRef={props.dest}
             className={$s.SearchBox} 
             whatToType="Enter destination"/>
-          <button type="submit" className={$s.RequestButton}>Request now</button>
+          <TypeNSearch 
+            className={$s.SearchBox} 
+            whatToType="Enter destination"/>
+          <button type="submit" className={$s.RequestButton}
+          >Request</button>
       </form>
     </div>
   )

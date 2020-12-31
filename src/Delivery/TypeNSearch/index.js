@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useRef} from "react";
 
 import useEffect from "./useEffectSkipFirst";
 import searchAddress from "./searchAddress";
@@ -8,11 +8,17 @@ import SearchResult from "./SearchResult";
 import $s from "./index.scss";
 
 const TypeNSearch = (props) => {
-  const [typed, setTyped] = props.typewriter || useState("");//the second part is only for testing purpose
+  //this allows me to grab the text value from its parent 
+  //by passing it the returned object from a useRef
+  const valueRef = props.valueRef || {} 
+
+  const [typed, setTyped] = useState("");
   const [searching, setSearching] = useState(false);
   const [results, setResults] = useState([]);
   const [showResult, setShow] = useState(false);
   const [selected, setSelected] = useState(false);
+
+
 
   const focusOnInput = e => {
     if (typed) {
@@ -29,6 +35,12 @@ const TypeNSearch = (props) => {
     setShow(false);
     setTyped("");
   }
+
+  useEffect(()=>{//modified useEffect, does not run initial render
+    if (selected) {
+      valueRef.current = typed;
+    }
+  }, [selected])
 
   useEffect(()=>{ //this is a modified useEffect hook that does not run on initial render check import
     if (!typed || selected) {

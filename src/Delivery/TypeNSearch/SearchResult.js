@@ -7,7 +7,6 @@ const SearchResult = (props) => {
 
   const {setShow, setTyped, setSelected} = props.setters;
   const whenClicked = (item) => () => {
-    console.log(item);
     setShow(false);
     setTyped(item);
     setSelected(true);
