@@ -1,27 +1,18 @@
 import React, {useState, useRef} from "react";
+import {useDispatch} from "react-redux";
 
 import $s from "./Request.scss";
 import TypeNSearch from "../TypeNSearch";
-import getCoordinates from "./getCoordinates";
+import {setLocations} from "./actions";
 
 const Request = (props) => {
-  const pickupAddr = useRef();
-  const destAddr = useRef();
+  const dispatch = useDispatch();
+  const pickup = useRef();
+  const dest = useRef();
 
   const calculateRoute = e => {
     e.preventDefault();
-    props.setPreviewReady(false);
-    Promise.all([
-      getCoordinates(pickupAddr).then(res=>{props.pickup.current=res}),
-      getCoordinates(destAddr).then(res=>{props.dest.current=res})
-    ]).then(()=>{
-      props.setPreviewReady(true);
-    })
-    // Promise.resolve().then(()=>{
-    //   props.pickup.current = [41.816, -79.125]
-    //   props.dest.current = [43.703, -79.632]
-    //   props.setPreviewReady(true);
-    // })
+    dispatch(setLocations(pickup.current, dest.current));
   }
 
   return (
@@ -31,11 +22,11 @@ const Request = (props) => {
         onSubmit={calculateRoute}
       >
           <TypeNSearch 
-            valueRef={pickupAddr}
+            valueRef={pickup}
             className={$s.SearchBox} 
             whatToType="Enter pickup location"/>
           <TypeNSearch 
-            valueRef={destAddr}
+            valueRef={dest}
             className={$s.SearchBox} 
             whatToType="Enter destination"/>
           <TypeNSearch 

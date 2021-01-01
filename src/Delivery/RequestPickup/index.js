@@ -1,23 +1,23 @@
 import React, {useState, useEffect, Suspense, useRef} from "react";
-
+import {Provider} from "react-redux";
 
 import Request from "./Request";
 const Map = React.lazy(()=>import("./Map"));
+import store from "./reducer";
 
 import $s from "./index.scss";
 
 const RequestPickup = () => {
-  const pickup = useRef(); //a two element array
-  const dest = useRef(); //a two element array
-  const [previewReady, setPreviewReady] = useState(false);
   return (
     <div>
-      <Request className={$s.Request} pickup={pickup} 
-        dest={dest} setPreviewReady={setPreviewReady}/>
+      <Provider store={store}>
+        <Request className={$s.Request}/>
 
-      <Suspense fallback={<div>Loading...</div>}>
-        {previewReady && <Map locations={{pickup, dest}} className={$s.Map}/>}
-      </Suspense>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Map className={$s.Map}/>
+        </Suspense>
+
+      </Provider>
 
     </div>
   
