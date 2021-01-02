@@ -15,37 +15,43 @@ const Map = (props) => {
     iconSize: [30, 30]
   })
 
-  const ref = useRef();
+  const mapNode = useRef();
+  
 
   useEffect(()=>{
-    if (!(pickup && dest)) {
-      return
-    }
+    const map = $l.map(mapNode.current);
     console.log("effect run");
-    Promise.all([
-      getCoordinates(pickup),
-      getCoordinates(dest),
-      getRoute(pickup, dest)
-    ]).then(res=>{
-      console.log('result from promises', res)
-      const pickupCoord = res[0];
-      const destCoord=res[1];
-      const route=res[2];
-      const start = $l.latLng(...pickupCoord);
-      const end = $l.latLng(...destCoord);
-      const bounds = $l.latLngBounds(start, end);
-      const map = $l.map(ref.current).fitBounds(bounds, {padding: [50, 50]});
-      $l.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{
-        attribution:'&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-      }).addTo(map);
-      $l.marker(start, {icon}).addTo(map);
-      $l.marker(end, {icon}).addTo(map);
-    })
+    if (pickup && dest) {
+      Promise.all([
+        getCoordinates(pickup),
+        getCoordinates(dest),
+        getRoute(pickup, dest)
+      ]).then(res=>{
+        console.log('result from promises', res)
+        const pickupCoord = res[0];
+        const destCoord=res[1];
+        const route=res[2];
+        const start = $l.latLng(...pickupCoord);
+        const end = $l.latLng(...destCoord);
+        const bounds = $l.latLngBounds(start, end);
+        map.fitBounds(bounds, {padding: [50, 50]});
+        $l.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{
+          attribution:'&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+        $l.marker(start, {icon}).addTo(map);
+        $l.marker(end, {icon}).addTo(map);
+      })
+    }
+
+    return ()=>{
+      console.log("removed")
+      map.remove();
+    }
   })
 
   return (
     <div className={props.className}>
-      <div id="map" ref={ref} className={$s.MapContainer}/>
+      <div id="map" ref={mapNode} className={$s.MapContainer}/>
     </div>
   )
 }
