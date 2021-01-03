@@ -16,21 +16,21 @@ const Map = (props) => {
   })
 
   const mapNode = useRef();
+  const mapObj = useRef();
   
+  useEffect(()=>{
+    mapObj.current = $l.map(mapNode.current);
+    return ()=>{mapObj.current.remove()}
+  })
 
   useEffect(()=>{
-    const map = $l.map(mapNode.current);
-    console.log("effect run");
+    const map = mapObj.current;
     if (pickup && dest) {
       Promise.all([
         getCoordinates(pickup),
         getCoordinates(dest),
-        getRoute(pickup, dest)
-      ]).then(res=>{
-        console.log('result from promises', res)
-        const pickupCoord = res[0];
-        const destCoord=res[1];
-        const route=res[2];
+      ]).then(coordinates=>{
+        const [pickupCoord, destCoord] = coordinates;
         const start = $l.latLng(...pickupCoord);
         const end = $l.latLng(...destCoord);
         const bounds = $l.latLngBounds(start, end);
@@ -40,12 +40,16 @@ const Map = (props) => {
         }).addTo(map);
         $l.marker(start, {icon}).addTo(map);
         $l.marker(end, {icon}).addTo(map);
-      })
-    }
 
-    return ()=>{
-      console.log("removed")
-      map.remove();
+        return getRoute(pickup, dest)
+      }).then(route=>{
+        console.log(route);
+        const navLine = $l.polyline(route, {
+          color: 'blue',
+          weight: 1,
+          smoothFactor: 10
+        }).addTo(map);
+      })
     }
   })
 
