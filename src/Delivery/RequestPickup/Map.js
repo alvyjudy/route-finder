@@ -29,10 +29,8 @@ const Map = (props) => {
       Promise.all([
         getCoordinates(pickup),
         getCoordinates(dest),
-        getRoute(pickup, dest)
-      ]).then(res=>{
-        const pickupCoord = res[0];
-        const destCoord=res[1];
+      ]).then(coordinates=>{
+        const [pickupCoord, destCoord] = coordinates;
         const start = $l.latLng(...pickupCoord);
         const end = $l.latLng(...destCoord);
         const bounds = $l.latLngBounds(start, end);
@@ -42,6 +40,15 @@ const Map = (props) => {
         }).addTo(map);
         $l.marker(start, {icon}).addTo(map);
         $l.marker(end, {icon}).addTo(map);
+
+        return getRoute(pickup, dest)
+      }).then(route=>{
+        console.log(route);
+        const navLine = $l.polyline(route, {
+          color: 'blue',
+          weight: 1,
+          smoothFactor: 10
+        }).addTo(map);
       })
     }
   })

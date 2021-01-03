@@ -1,6 +1,6 @@
-import ajax from "./ajax";
+import ajax from "../../ajax";
 
-export default (addr) => {
+const searchAddressStub = (addr) => {
   return new Promise((resolve, reject)=>{
     if (addr === "false") {
       setTimeout(()=>{resolve(["Address not found"])}, 200)
@@ -13,5 +13,10 @@ export default (addr) => {
 }
 
 const searchAddress = (addr) => {
-
+  const addrEncoded = encodeURIComponent(addr);
+  return ajax(`/api/map/predict-search/${addrEncoded}`).then(res=>{
+    return res.data.results
+  })
 }
+
+export default searchAddress;
