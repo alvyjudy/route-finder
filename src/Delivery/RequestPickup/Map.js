@@ -52,9 +52,9 @@ const Map = (props) => {
       getRoute(pickup, dest).then(res=>{
         const route = res.route;
         const navLine = $l.polyline(route, {
-          color: 'blue',
-          weight: 3,
-          smoothFactor: 10
+          color: 'red',
+          weight: 5,
+          smoothFactor: 0
         }).addTo(map);
 
         const distance = res.distance;
