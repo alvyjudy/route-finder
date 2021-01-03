@@ -26,7 +26,6 @@ const Map = (props) => {
   }, [pickup, dest])
 
   useEffect(()=>{
-    console.log('effect running')
     const map = mapObj.current;
     if (pickup && dest) {
       Promise.all([
@@ -43,9 +42,14 @@ const Map = (props) => {
         }).addTo(map);
         $l.marker(start, {icon}).addTo(map);
         $l.marker(end, {icon}).addTo(map);
+      })
+    }
+  }, [pickup, dest])
 
-        return getRoute(pickup, dest)
-      }).then(res=>{
+  useEffect(()=>{ //get route;
+    const map = mapObj.current;
+    if (pickup && dest) {
+      getRoute(pickup, dest).then(res=>{
         const route = res.route;
         const navLine = $l.polyline(route, {
           color: 'blue',
