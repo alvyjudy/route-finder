@@ -32,9 +32,6 @@ const Request = (props) => {
             className={$s.SearchBox} 
             data-cy="Destination" 
             whatToType="Enter destination"/>
-          <TypeNSearch 
-            className={$s.SearchBox} 
-            whatToType="Enter destination"/>
           <button type="submit" className={$s.RequestButton} data-cy="LoadMap"
           >Request</button>
       </form>
