@@ -34,9 +34,10 @@ const apiCall = (pickup, dest) => {
   return callMapQuest.post("/directions/v2/route", {
     locations:[pickup, dest],
     mapState:{
-      width: 10000, 
-      height: 10000
-    }
+      width: 3000, 
+      height: 3000
+    },
+    fullShape: true
   }).then(res=>{
     const route = [];
     const flatRoute = res.data.route.shape.shapePoints
