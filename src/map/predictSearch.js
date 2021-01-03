@@ -2,10 +2,10 @@ const predictSearchStub = () => (req, res, next) => {
   const address = req.params.address;
   if (!address) {res.status(400).send("Address not included in request"); return}
 
-  const results = stub(address);
-  if (!results) {res.status(500).send("API resource unavailable");return}
+  const addresses = stub(address);
+  if (!addresses) {res.status(500).send("API resource unavailable");return}
 
-  res.status(200).json({results})
+  res.status(200).json({addresses})
 }
 
 const stub = (address) => {

@@ -15,6 +15,7 @@ describe("predictive search", ()=>{
     const address = encodeURIComponent("1234 Bloor St. W.");
     return axios.get(`${SOURCE}/${address}`).then(res=>{
       expect(res.status).toBe(200);
+      expect(res.data.addresses).toBeDefined();
     })
   })
 
