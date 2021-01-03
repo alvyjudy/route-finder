@@ -5,7 +5,7 @@ const predictSearchStub = () => (req, res, next) => {
   const results = stub(address);
   if (!results) {res.status(500).send("API resource unavailable");return}
 
-  res.status(200).send(results)
+  res.status(200).json({results})
 }
 
 const stub = (address) => {

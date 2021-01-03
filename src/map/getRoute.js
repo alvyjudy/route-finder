@@ -17,11 +17,10 @@ const stub = (pickup, dest, steps) => {
 
   const result = []
   for (let i = 0; i<steps; i++) {
-    const lat = lat1 + (lat2-lat1)/i;
-    const lng = lng1 + (lng2-lng1)/i;
-    result.push(lat);
-    result.push(lng);
-  }
+    const lat = lat1 + i*(lat2-lat1)/steps;
+    const lng = lng1 + i*(lng2-lng1)/steps;
+    result.push([lat, lng]);
+  };
   return result
 }
 
