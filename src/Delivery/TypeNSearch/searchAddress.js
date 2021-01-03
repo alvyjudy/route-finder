@@ -1,3 +1,5 @@
+import ajax from "./ajax";
+
 export default (addr) => {
   return new Promise((resolve, reject)=>{
     if (addr === "false") {
@@ -8,4 +10,8 @@ export default (addr) => {
       )}, 200)
     }
   })
+}
+
+const searchAddress = (addr) => {
+
 }
