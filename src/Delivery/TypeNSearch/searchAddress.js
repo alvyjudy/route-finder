@@ -15,7 +15,7 @@ const searchAddressStub = (addr) => {
 const searchAddress = (addr) => {
   const addrEncoded = encodeURIComponent(addr);
   return ajax(`/api/map/predict-search/${addrEncoded}`).then(res=>{
-    return res.data.results
+    return res.data.addresses
   })
 }
 
