@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const ajax = axios.create({
-  timeout:1000,
+  timeout:2000,
   headers: {
     "Content-Type":"application/json"
   }

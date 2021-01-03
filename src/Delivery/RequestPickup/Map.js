@@ -1,14 +1,16 @@
 import React, {useEffect, useRef} from "react";
 import "leaflet/dist/leaflet.css";
 import $l from "leaflet/dist/leaflet.js";
-import {useSelector} from "react-redux";
+import {useSelector, useDispatch} from "react-redux";
 
 import $s from "./Map.scss";
 import getCoordinates from "./getCoordinates";
 import getRoute from "./getRoute";
+import {setDistance} from "./actions";
 
 
 const Map = (props) => {
+  const dispatch=useDispatch();
   const {pickup, dest} = useSelector(store=>store);
   const icon = $l.icon({
     iconUrl:"/assets/mapMarker.png",
@@ -21,7 +23,7 @@ const Map = (props) => {
   useEffect(()=>{
     mapObj.current = $l.map(mapNode.current);
     return ()=>{mapObj.current.remove()}
-  })
+  }, [pickup, dest])
 
   useEffect(()=>{
     const map = mapObj.current;
@@ -40,18 +42,26 @@ const Map = (props) => {
         }).addTo(map);
         $l.marker(start, {icon}).addTo(map);
         $l.marker(end, {icon}).addTo(map);
-
-        return getRoute(pickup, dest)
-      }).then(route=>{
-        console.log(route);
-        const navLine = $l.polyline(route, {
-          color: 'blue',
-          weight: 1,
-          smoothFactor: 10
-        }).addTo(map);
       })
     }
-  })
+  }, [pickup, dest])
+
+  useEffect(()=>{ //get route;
+    const map = mapObj.current;
+    if (pickup && dest) {
+      getRoute(pickup, dest).then(res=>{
+        const route = res.route;
+        const navLine = $l.polyline(route, {
+          color: 'red',
+          weight: 5,
+          smoothFactor: 0
+        }).addTo(map);
+
+        const distance = res.distance;
+        dispatch(setDistance(distance));
+      })
+    }
+  }, [pickup, dest])
 
   return (
     <div className={props.className}>
