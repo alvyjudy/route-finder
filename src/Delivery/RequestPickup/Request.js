@@ -1,11 +1,12 @@
 import React, {useState, useRef} from "react";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 import $s from "./Request.scss";
 import TypeNSearch from "../TypeNSearch";
 import {setLocations} from "./actions";
 
 const Request = (props) => {
+  const distance = useSelector(store=>store.distance);
   const dispatch = useDispatch();
   const pickup = useRef();
   const dest = useRef();
@@ -37,6 +38,8 @@ const Request = (props) => {
           <button type="submit" className={$s.RequestButton} data-cy="LoadMap"
           >Request</button>
       </form>
+
+      {distance && <div>{distance} KM</div>}
     </div>
   )
 }

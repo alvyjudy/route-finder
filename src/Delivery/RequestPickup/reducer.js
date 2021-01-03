@@ -1,8 +1,8 @@
 import {createStore} from "redux";
 
-import {SET_LOCATIONS} from "./actions";
+import {SET_LOCATIONS, SET_DISTANCE} from "./actions";
 
-const initialState = {pickup: "", dest: ""}
+const initialState = {pickup: "", dest: "", distance:""}
 
 const reducer = (state=initialState, action) => {
   switch (action.type) {
@@ -11,6 +11,12 @@ const reducer = (state=initialState, action) => {
         ...state,
         pickup: action.pickup,
         dest: action.dest
+      }
+
+    case SET_DISTANCE:
+      return {
+        ...state,
+        distance: action.distance
       }
 
     default: 
