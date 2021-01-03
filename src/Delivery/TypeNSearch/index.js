@@ -76,12 +76,13 @@ const TypeNSearch = (props) => {
 
       <div className={$s.InputFieldBox}>
 
-        <input className={$s.InputField} 
+        <input className={$s.InputField} data-cy="InputField"
           onChange={startTyping} value={typed}
           onFocus={focusOnInput}
           placeholder={props.whatToType || "Don't forget to specify label"}/>
         
-        {typed && <button className={$s.Delete} onClick={clickDelete}>X</button>}
+        {typed && <button data-cy="DeleteText" className={$s.Delete} 
+          onClick={clickDelete}>X</button>}
       </div>
 
       <div className={$s.ResultBoxAnchor}>
@@ -91,7 +92,8 @@ const TypeNSearch = (props) => {
             {searching && <SearchingForResult/>}
             
             {results.length === 0 || (
-              <SearchResult results={results} setters={{setTyped, setShow, setSelected}} />
+              <SearchResult results={results} data-cy="SearchResult"
+                setters={{setTyped, setShow, setSelected}} />
             )}
 
           </div>}
