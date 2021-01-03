@@ -11,7 +11,7 @@ const RequestPickup = () => {
   return (
     <div>
       <Provider store={store}>
-        <Request className={$s.Request}/>
+        <Request className={$s.Request} data-cy="Request" />
 
         <Suspense fallback={<div>Loading...</div>}>
           <Map className={$s.Map}/>

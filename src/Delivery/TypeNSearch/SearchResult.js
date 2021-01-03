@@ -13,7 +13,7 @@ const SearchResult = (props) => {
   }
 
   return (
-    <div className={$s.Entries}>
+    <div className={$s.Entries} data-cy={props['data-cy']}>
     {items.map((item, i)=>(
       <div className={$s.Entry} key={i} 
         onClick={whenClicked(item)}
