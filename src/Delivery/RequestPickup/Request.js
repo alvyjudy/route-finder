@@ -35,8 +35,6 @@ const Request = (props) => {
           <button type="submit" className={$s.RequestButton} data-cy="LoadMap"
           >Request</button>
       </form>
-
-      {distance && <div>{distance} KM</div>}
     </div>
   )
 }
