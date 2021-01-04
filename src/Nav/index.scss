@@ -1,10 +1,21 @@
 .NavBar {
   background-color: black;
   color: white;
-  display: flex;
-  flex-direction: row;
+  height: 2em;
+  display: grid;
+  grid-template-columns: 8fr 1fr 1fr;
+  align-items: center;
+}
+
+.Logo {
+  grid-column: 1 / 2;
+  object-fit: cover;
+  height: 100%;
+  filter: invert(1);
+  margin: 0 0 0 1em;
 }
 
 .Link {
+  margin: 0 0.5em;
   color: white;
 }

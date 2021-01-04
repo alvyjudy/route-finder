@@ -1,4 +1,4 @@
-@use "../../globalStyle/theme";
+@use "../../styles/theme";
 
 %SearchBox {
   background-color: theme.$lightShade;
@@ -7,24 +7,34 @@
 
 .InputFieldBox {
   @extend %SearchBox;
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
   align-items: center;
   height: 3em;
-  justify-content: start;
 }
 
 .InputField {
+  grid-column: 1 / 2;
+  margin: 0 0 0 1em;
   outline: none;
   border: none;
   font-size: 1.1em;
-  width: 80%;
+  width: 100%;
   background-color: inherit;
 
   &::placeholder {
     color: gray;
     opacity: 1;
   }
+}
+
+.Delete {
+  grid-column: -1 / -2;
+  justify-self: end;
+  border: 0;
+  margin: 0 1em 0 0;
+  color: gray;
+  outline: none;
 }
 
 
@@ -41,9 +51,5 @@
   width: 100%;
 }
 
-.Delete {
-  border: 0;
-  color: gray;
-  outline: none;
-}
+
 

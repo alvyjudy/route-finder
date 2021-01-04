@@ -2,7 +2,7 @@ import React from "react";
 import ReactDom from "react-dom";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 
-import baseStyle from "./globalStyle/index.scss";
+import "./styles/index.scss";
 
 import Delivery from "./Delivery";
 import Nav from "./Nav";

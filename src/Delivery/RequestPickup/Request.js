@@ -17,7 +17,7 @@ const Request = (props) => {
   }
 
   return (
-    <div className={props.className} data-cy={props['data-cy']}>
+    <div className={$s.Request} data-cy="Request">
       <p className={$s.ReqPickupTitle}>Deliver your parcel now</p>
       <form className={$s.RequestPickupForm}
         onSubmit={calculateRoute}

@@ -9,9 +9,9 @@ import $s from "./index.scss";
 
 const RequestPickup = () => {
   return (
-    <div>
+    <div className={$s.RequestPickup}>
       <Provider store={store}>
-        <Request className={$s.Request} data-cy="Request" />
+        <Request data-cy="Request" />
 
         <Suspense fallback={<div>Loading...</div>}>
           <Map className={$s.Map}/>
