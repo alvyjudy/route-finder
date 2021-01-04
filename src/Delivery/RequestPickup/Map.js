@@ -21,8 +21,10 @@ const Map = (props) => {
   const mapObj = useRef();
   
   useEffect(()=>{
-    mapObj.current = $l.map(mapNode.current);
-    return ()=>{mapObj.current.remove()}
+    if (pickup && dest) {
+      mapObj.current = $l.map(mapNode.current);
+      return ()=>{mapObj.current.remove()}
+    }
   }, [pickup, dest])
 
   useEffect(()=>{
