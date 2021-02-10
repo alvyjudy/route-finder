@@ -5,8 +5,8 @@
   "author": "alvy <alvyjudy@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node serve.js",
-    "startLocal": "export NODE_ENV=development; nodemon serve.js"
+    "start": "node index.js",
+    "startLocal": "export NODE_ENV=development; nodemon index.js"
   },
   "dependencies": {
     "axios": "^0.21.0",
