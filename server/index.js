@@ -4,12 +4,15 @@ const path = require("path");
 
 const map = require("./src/map");
 
-app.use("/api/map", map);
+app.use("/api/map", map); // has its own 404
+
 app.use("/assets", express.static("assets"));
 app.use("/assets/*", (req, res) => {
   res.status(404).send("Asset not found");
 });
 app.use(express.static("dist"));
+
+//history API fallback
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "dist/index.html"));
 });
