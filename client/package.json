@@ -10,7 +10,7 @@
   "scripts": {
     "build": "webpack",
     "start": "node serve.js",
-    "startLocal": "export NODE_ENV=development; webpack serve"
+    "startLocal": "webpack --mode=development serve "
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
