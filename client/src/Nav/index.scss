@@ -1,18 +1,27 @@
+@use "../styles/theme";
+
 .NavBar {
   background-color: black;
   color: white;
-  height: 2em;
-  display: grid;
-  grid-template-columns: 8fr 1fr 1fr;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
+  overflow: hidden;
+  padding: 0.5em 1em;
+  @media (min-width: theme.$phoneBreakpoint) {
+    padding: 0.5em 4em;
+  }
+}
+
+.LogoContainer {
+  overflow: hidden;
+  height: 100%;
 }
 
 .Logo {
-  grid-column: 1 / 2;
   object-fit: cover;
-  height: 100%;
   filter: invert(1);
-  margin: 0 0 0 1em;
+  height: 4em;
 }
 
 .Link {
