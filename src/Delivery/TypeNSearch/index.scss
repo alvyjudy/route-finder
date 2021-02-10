@@ -1,0 +1,55 @@
+@use "../../styles/theme";
+
+%SearchBox {
+  background-color: theme.$lightShade;
+  width: 100%;
+}
+
+.InputFieldBox {
+  @extend %SearchBox;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  align-items: center;
+  height: 3em;
+}
+
+.InputField {
+  grid-column: 1 / 2;
+  margin: 0 0 0 1em;
+  outline: none;
+  border: none;
+  font-size: 1.1em;
+  width: 100%;
+  background-color: inherit;
+
+  &::placeholder {
+    color: gray;
+    opacity: 1;
+  }
+}
+
+.Delete {
+  grid-column: -1 / -2;
+  justify-self: end;
+  border: 0;
+  margin: 0 1em 0 0;
+  color: gray;
+  outline: none;
+}
+
+
+.ResultBox {
+  @extend %SearchBox;
+  position: absolute;
+  height: 12em;
+  overflow: scroll;
+  z-index: 3;
+}
+
+.ResultBoxAnchor {
+  position: relative;
+  width: 100%;
+}
+
+
+
