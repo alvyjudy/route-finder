@@ -9,8 +9,7 @@
   "license": "MIT",
   "scripts": {
     "build": "webpack",
-    "start": "node serve.js",
-    "startLocal": "webpack --mode=development serve "
+    "startLocal": "webpack serve --mode=development"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
