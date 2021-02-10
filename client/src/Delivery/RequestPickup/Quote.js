@@ -1,23 +1,21 @@
-import React, {useState, useEffect} from 'react';
-import {useSelector, useDispatch} from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 import $s from "./Quote.scss";
 
 const Quote = () => {
-  const distance = useSelector(store=>store.distance);
-  const time = 1;
-  const price = Math.floor((distance*0.9 + 4) * 100)/100;
+  const distance = useSelector((store) => store.distance);
 
-  if (!distance) {return null}
+  if (!distance) {
+    return null;
+  }
 
   return (
     <div className={$s.QuoteBox}>
-      <p className={$s.Title}>Est. Delivery</p>
-      <p className={$s.Subtitle}>{time} day</p>
-      <p className={$s.TextLeft}>${price} CAD</p>
-      <button className={$s.SubmitButton}>Confirm</button>
+      <p className={$s.Title}>Distance</p>
+      <p className={$s.Subtitle}>{distance} km</p>
     </div>
-  )
-}
+  );
+};
 
 export default Quote;
