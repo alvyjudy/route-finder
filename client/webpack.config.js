@@ -2,66 +2,64 @@ const webpack = require("webpack");
 const path = require("path");
 
 module.exports = {
-  entry:"./src/index.js",
+  entry: "./src/index.js",
   output: {
-    path: path.join(__dirname, "dist"),
+    path: path.join(__dirname, "../server/dist"),
   },
   devtool: "inline-source-map",
-  module:{
+  module: {
     rules: [
       {
-        test:/\.js$/, 
-        exclude:/node_modules/, 
-        loader:"babel-loader",
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: "babel-loader",
       },
       {
-        test:/\.scss$/,
-        use:[
+        test: /\.scss$/,
+        use: [
           "style-loader",
           {
             loader: "css-loader",
-            options:{
-              modules:true,
-            }
+            options: {
+              modules: true,
+            },
           },
           "postcss-loader",
-          "sass-loader"
-        ]
+          "sass-loader",
+        ],
       },
       {
-        test:/\.css$/,
-        use:[
+        test: /\.css$/,
+        use: [
           "style-loader",
           {
             loader: "css-loader",
-            options:{
-              modules:false,
-            }
+            options: {
+              modules: false,
+            },
           },
           "postcss-loader",
-          "sass-loader"
-        ]
+          "sass-loader",
+        ],
       },
       {
-        test:/\.png$/,
-        loader:"file-loader"
-      }
+        test: /\.png$/,
+        loader: "file-loader",
+      },
     ],
   },
-  devServer:{
-    contentBase:"./dist",
+  devServer: {
+    contentBase: "../server/dist",
     port: 3001,
     host: "0.0.0.0",
     proxy: {
       "/api": {
-        target:"http://localhost:3002",
-        pathRewrite:{"^/api":""}
+        target: "http://localhost:3002",
       },
-      "/assets":{
-        target:"http://localhost:3003",
-        pathRewrite: {"^/assets":""},
-      }
+      "/assets": {
+        target: "http://localhost:3002",
+      },
     },
     historyApiFallback: true,
-  }
-}
+  },
+};

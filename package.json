@@ -1,0 +1,13 @@
+{
+  "name": "route-finder",
+  "version": "1.0.0",
+  "private":true,
+  "main": "index.js",
+  "repository": "https://github.com/alvyjudy/route-finder.git",
+  "author": "alvy <alvyjudy@gmail.com>",
+  "license": "MIT",
+  "workspaces":[
+    "server",
+    "client"
+  ]
+}
