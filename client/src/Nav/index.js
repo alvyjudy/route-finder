@@ -8,7 +8,7 @@ export default () => {
     <div className={$s.NavBar}>
       <div className={$s.primaryNavigation}>
         <div className={$s.LogoContainer}>
-          <img className={$s.Logo} src="/assets/logo.svg" alt="route finder" />
+          <img className={$s.Logo} src="/assets/logo.png" alt="route finder" />
         </div>
       </div>
 
